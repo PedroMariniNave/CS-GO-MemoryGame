@@ -1,9 +1,9 @@
 const cards = document.querySelectorAll('.card');
-let firstCard, secondCard;
+var firstCard, secondCard;
 var foundCardsAmount = 0;
 
 function flipCard() {
-    if (secondCard != null) return;
+    if (hasTwoFlippedCards()) return;
 
     this.classList.add('flip');
     disableCardClick(this);
@@ -19,7 +19,7 @@ function flipCard() {
     if (match) {
         foundCardsAmount += 2;
         var audio = null;
-        if (foundCardsAmount >= cards.length) {
+        if (isFinished()) {
             audio = new Audio('./sounds/winner.mp3');
         } else {
             audio = new Audio('./sounds/match.mp3');
@@ -33,9 +33,18 @@ function flipCard() {
             unflipCards();
         }
 
-        enableAllCardsClick();
+        enableCardClick(firstCard);
+        enableCardClick(secondCard);
         resetSelectedCards();
     }, 1500);
+}
+
+function hasTwoFlippedCards() {
+    return secondCard != null;
+}
+
+function isFinished() {
+    return foundCardsAmount >= cards.length;
 }
 
 function checkCardsMatch() {

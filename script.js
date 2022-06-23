@@ -3,7 +3,7 @@ var firstCard, secondCard;
 var foundCardsAmount = 0;
 
 function flipCard() {
-    if (hasTwoFlippedCards()) return;
+    if (hasTwoCardsFlipped()) return;
 
     this.classList.add('flip');
     disableCardClick(this);
@@ -39,7 +39,7 @@ function flipCard() {
     }, 1500);
 }
 
-function hasTwoFlippedCards() {
+function hasTwoCardsFlipped() {
     return secondCard != null;
 }
 
